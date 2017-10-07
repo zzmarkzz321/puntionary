@@ -10,7 +10,7 @@ from app import app, lm
 from forms import ExampleForm, LoginForm
 from models import User
 
-@app.route('/')
+@app.route('/', methods = ['GET','POST'])
 def index():
 	return render_template('index.html')
 
