@@ -4,7 +4,7 @@ Python Aplication Template
 Licence: GPLv3
 """
 
-from flask import url_for, redirect, render_template, flash, g, session
+from flask import url_for, redirect, render_template, flash, g, session, request, jsonify
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from app import app, lm
 from forms import ExampleForm, LoginForm
@@ -13,6 +13,16 @@ from models import User
 @app.route('/')
 def index():
 	return render_template('index.html')
+
+@app.route('/test', methods=['POST', 'GET'])
+def test():
+	if request.method == 'POST':
+		print('Hello! I was requested');
+		datas = request.form
+		
+		return jsonify(datas), 200
+
+	return 'it works'
 
 
 @app.route('/list/')
