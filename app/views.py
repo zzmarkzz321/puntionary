@@ -36,28 +36,12 @@ def entities_text(text):
     entity_type = ('UNKNOWN', 'PERSON', 'LOCATION', 'ORGANIZATION',
                    'EVENT', 'WORK_OF_ART', 'CONSUMER_GOOD', 'OTHER')
 
-	# Detects syntax in the document. You can also analyze HTML with:
-    #   document.type == enums.Document.Type.HTML
-    tokens = client.analyze_syntax(document).tokens
-
-    # part-of-speech tags from enums.PartOfSpeech.Tag
-    pos_tag = ('UNKNOWN', 'ADJ', 'ADP', 'ADV', 'CONJ', 'DET', 'NOUN', 'NUM',
-               'PRON', 'PRT', 'PUNCT', 'VERB', 'X', 'AFFIX')
-
-    for token in tokens:
-        print(u'{}: {}'.format(pos_tag[token.part_of_speech.tag],
-                               token.text.content))
-
     for entity in entities:
         print('=' * 20)
         print(u'{:<16}: {}'.format('name', entity.name))
         print(u'{:<16}: {}'.format('type', entity_type[entity.type]))
         print(u'{:<16}: {}'.format('metadata', entity.metadata))
         print(u'{:<16}: {}'.format('salience', entity.salience))
-        print(u'{:<16}: {}'.format('wikipedia_url',
-              entity.metadata.get('wikipedia_url', '-')))
-
-entities_text('Would you like a can of soda')
 
 @app.route('/')
 def index():
@@ -67,9 +51,11 @@ def index():
 def test():
 	if request.method == 'POST':
 		print('Hello! I was requested');
-		datas = request.form
-		
-		return jsonify(datas), 200
+		datas = request.json
+	
+		entities_text(str(datas['key']))
+		print('*****')
+		return 'Works', 200
 
 	return 'it works'
 

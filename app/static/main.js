@@ -1,15 +1,17 @@
 $(document).ready(function() {
 	$("#submit").click(function() {
       var text = $("#input").val();
-	  $.ajax({url: 'http://localhost:5000/test', 
-	    type : 'POST',
-	    data: {
+	  $.ajax({
+			url: 'http://localhost:5000/test', 
+			type : 'POST',
+			contentType: 'application/json',
+	    data: JSON.stringify({
 	    	key: text
-	    },
+	    }),
 	     success: function(res){
-	       console.log("success!", res.key);
+	       console.log("success!", res);
 	      	
-	       $("#test").text(res.key[0]);
+	       $("#test").text(res);
 	     }
 	      
 		})
