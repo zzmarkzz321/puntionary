@@ -9,7 +9,6 @@ from flask.ext.login import login_user, logout_user, current_user, login_require
 from app import app, lm
 from forms import ExampleForm, LoginForm
 from models import User
-import six
 
 @app.route('/')
 def index():

@@ -2,6 +2,7 @@
 from google.cloud import language
 from google.cloud.language import enums
 from google.cloud.language import types
+import six
 
 def process_text(text):
     """Detects entities in the text."""
