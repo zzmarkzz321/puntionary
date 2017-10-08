@@ -39,8 +39,10 @@ def test():
 
 		try:
 			res = json.loads(response.text)
+			# print(res)
 		except:
 			res = jsonify(response='')
+			# print(res)
 		print(res)
 		# return jsonify(response=response), 200
 		return jsonify(res=res), 200
