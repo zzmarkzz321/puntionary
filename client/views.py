@@ -18,26 +18,32 @@ def index():
 def test():
 	if request.method == 'POST':
 		datas = request.json
-        print(datas)
+		print(datas)
 		# Grab the keywords from the NLP framework
-        try:
-            response = process_text(str(datas['key']))
-        except:
-            response = process_text(str(datas['firstParam']))
+		try:
+			response = process_text(str(datas['key']))
+		except:
+			response = process_text(str(datas['firstParam']))
 
-        payload = []
-        for p in response:
-            payload.append(p)
+		payload = []
+		for p in response:
+			payload.append(p)
 
-        payload = jsonify(payload=payload)
-        print(payload.data)
-        # Filter and query the correct puns for the respective keyword(s)
-        response = requests.get('http://localhost:5000/api/v1/puns', params=payload.data, headers = {'Access-Control-Request-Method': 'GET', 'Access-Control-Allow-Origin': 'http://localhost:3000'})
+		payload = jsonify(payload=payload)
+		try:
+			params = json.loads(payload.data)
+		except:
+			params = jsonify(payload='')
+		# Filter and query the correct puns for the respective keyword(s)
+		response = requests.get('http://localhost:5000/api/v1/puns', params=params, headers = {'Access-Control-Request-Method': 'GET', 'Access-Control-Allow-Origin': 'http://localhost:3000'})
 
-        res = json.loads(response.text)
-        print(res)
-        # return jsonify(response=response), 200
-        return jsonify(res=res), 200
+		try:
+			res = json.loads(response.text)
+		except:
+			res = jsonify(response='')
+		print(res)
+		# return jsonify(response=response), 200
+		return jsonify(res=res), 200
 
 	return 'it works'
 
