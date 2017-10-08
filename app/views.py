@@ -10,6 +10,7 @@ from app import app, lm
 from forms import ExampleForm, LoginForm
 from models import User 
 from nlp import process_text
+import requests
 
 @app.route('/')
 def index():
@@ -18,15 +19,22 @@ def index():
 @app.route('/test', methods=['POST', 'GET'])
 def test():
 	if request.method == 'POST':
-		print('Hello! I was requested');
 		datas = request.json
-	
-		process_text(str(datas['key']))
-		print('*****')
-		return 'Works', 200
+		# Grab the keywords from the NLP framework
+		payload = process_text(str(datas['key']))
+		print(jsonify(payload=payload))
+		# Filter and query the correct puns for the respective keyword(s)
+		response = requests.get('http://localhost:5000/testing', params=jsonify(payload=payload).data)
+
+		return jsonify(response=response), 200
 
 	return 'it works'
 
+@app.route('/testing')
+def testing():
+	print('get receinved!')
+
+	return jsonify(text='goods'), 200
 
 @app.route('/list/')
 def posts():
