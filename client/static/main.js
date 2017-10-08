@@ -2,7 +2,7 @@ $(document).ready(function() {
 	$("#submit").click(function() {
       var text = $("#input").val();
 	  $.ajax({
-			url: 'http://localhost:5000/test', 
+			url: 'http://localhost:3000/test', 
 			type : 'POST',
 			contentType: 'application/json',
 	    data: JSON.stringify({

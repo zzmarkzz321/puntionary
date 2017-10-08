@@ -12,6 +12,8 @@ from flask.ext.login import LoginManager
 
 client = Flask(__name__)
 
+bs = Bootstrap(client) #flask-bootstrap
+
 #Configuration of application, see configuration.py, choose one and uncomment.
 #app.config.from_object('configuration.ProductionConfig')
 client.config.from_object('client.configuration.DevelopmentConfig')
