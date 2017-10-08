@@ -1,6 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { Animated, AppRegistry, Button, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+<<<<<<< HEAD
 import { requests } from 'util';
+=======
+>>>>>>> 1e10ca1e4c0ea75c57edbf977e8cc65aa1223771
 
 /**
 * :D
@@ -60,6 +63,7 @@ export default class App extends React.Component {
   }
 
   _handleOnPress = () => {
+<<<<<<< HEAD
     // Log the user's input
     console.log(this.state.query);
     this.setState({
@@ -69,6 +73,41 @@ export default class App extends React.Component {
       this.state.offsetY,
       { toValue: -100 }
     ).start();
+=======
+      return fetch('http://10.105.208.209:3000/punny',
+        {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            firstParam: this.state.query
+          })
+        })
+        .then((res) => {
+          // Log the user's input
+          console.log(this.state.query);
+          Animated.timing(
+            this.state.offsetY,
+            { toValue: -100 }
+          ).start();
+
+          return res.json()
+        })
+        .then((resJson) => {
+          console.log(resJson);
+          this.setState({
+            results: resJson['res']['response'][0]['phrase']
+          });
+
+          return resJson
+        })
+        .catch((err) => {
+          console.log(err)
+          console.log('******')
+        })
+>>>>>>> 1e10ca1e4c0ea75c57edbf977e8cc65aa1223771
   };
 }
 
