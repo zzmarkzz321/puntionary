@@ -28,10 +28,9 @@ def toggle_complete():
         # serverResponce = res.json()
         print(type(res.text))
 
-        if type(res.text) != type('str'):
+        if res.text != '[  ]':
             print('if')
             response = json.loads(res.text)
-            print(response['phrase'][0])
         else:
             print('else')
             response = [{
@@ -40,6 +39,9 @@ def toggle_complete():
     except:
         # Default in case no key words are included
         print('INSIDE EXCEPT')
+        response = [{
+            'phrase': 'This is sodapressing. Looks like I don\'t have a pun for that! (Yet). Teach me some puns to help others!'
+        }]
     # keywords = ['dairy']
 
     # query = {'$or': []}
