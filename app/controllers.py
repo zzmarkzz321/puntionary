@@ -21,16 +21,17 @@ def toggle_complete():
         query = jsonify({
             "keyword": keyword
         })
-
+        print(query.data)
         res = requests.get('https://api.mlab.com/api/1/databases/puns/collections/puns?apiKey=QMnAIvg_hFPN4adkAb5hrWn1tU1QZafQ&f={"phrase":1}&q=%s' % (query.data))
         # res = requests.get('https://api.mlab.com/api/1/databases/puns/collections/puns?q={"keyword":"' + keyword + '"}&apiKey=QMnAIvg_hFPN4adkAb5hrWn1tU1QZafQ')
         # print 'response from server:', res.text
         # serverResponce = res.json()
-        print(res.text)
+        print(type(res.text))
 
-        if res.text != '[  ]':
+        if type(res.text) != type('str'):
             print('if')
             response = json.loads(res.text)
+            print(response['phrase'][0])
         else:
             print('else')
             response = [{
