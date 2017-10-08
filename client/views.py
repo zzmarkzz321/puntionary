@@ -18,13 +18,20 @@ def test():
 	if request.method == 'POST':
 		datas = request.json
 		# Grab the keywords from the NLP framework
-		payload = process_text(str(datas['key']))
-		print(jsonify(payload=payload))
-		headers = {'user-agent': 'my-app/0.0.1'}
-		# Filter and query the correct puns for the respective keyword(s)
-		response = requests.get('http://localhost:5000/testing', params=jsonify(payload=payload), headers = {'Access-Control-Request-Method': 'GET', 'Access-Control-Allow-Origin': 'http://localhost:3000'})
+		response = process_text(str(datas['key']))
 
-		return jsonify(response=response), 200
+		payload = []
+		for p in response:
+			payload.append(p)
+
+		
+		payload = jsonify(payload=payload)
+		print(payload.data)
+		# Filter and query the correct puns for the respective keyword(s)
+		response = requests.get('http://localhost:5000/testing', params=payload.data, headers = {'Access-Control-Request-Method': 'GET', 'Access-Control-Allow-Origin': 'http://localhost:3000'})
+
+		# return jsonify(response=response), 200
+		return jsonify({'test': 'cool!'}), 200
 
 	return 'it works'
 
