@@ -20,10 +20,8 @@ def test():
 		datas = request.json
 		print(datas)
 		# Grab the keywords from the NLP framework
-		try:
-			response = process_text(str(datas['key']))
-		except:
-			response = process_text(str(datas['firstParam']))
+
+		response = process_text(str(datas['key']))
 
 		payload = []
 		for p in response:

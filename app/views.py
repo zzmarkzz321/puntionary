@@ -1,0 +1,92 @@
+# -*- encoding: utf-8 -*-
+"""
+Python Aplication Template
+Licence: GPLv3
+"""
+
+from flask import url_for, redirect, render_template, flash, g, session, request, jsonify
+from flask.ext.login import login_user, logout_user, current_user, login_required
+from app import app, lm
+from forms import ExampleForm, LoginForm
+from models import User 
+from nlp import process_text
+import requests
+
+@app.route('/')
+def index():
+	return render_template('index.html')
+
+@app.route('/test', methods=['POST', 'GET'])
+def test():
+	if request.method == 'POST':
+		datas = request.json
+		# Grab the keywords from the NLP framework
+		payload = process_text(str(datas['key']))
+		print(jsonify(payload=payload))
+		# Filter and query the correct puns for the respective keyword(s)
+		response = requests.get('http://localhost:5000/testing', params=jsonify(payload=payload).data)
+
+		return jsonify(response=response), 200
+
+	return 'it works'
+
+@app.route('/testing')
+def testing():
+	print('get receinved!')
+
+	return jsonify(text='goods'), 200
+
+@app.route('/list/')
+def posts():
+	return render_template('list.html')
+
+@app.route('/new/')
+@login_required
+def new():
+	form = ExampleForm()
+	return render_template('new.html', form=form)
+
+@app.route('/save/', methods = ['GET','POST'])
+@login_required
+def save():
+	form = ExampleForm()
+	if form.validate_on_submit():
+		print "salvando os dados:"
+		print form.title.data
+		print form.content.data
+		print form.date.data
+		flash('Dados salvos!')
+	return render_template('new.html', form=form)
+
+@app.route('/view/<id>/')
+def view(id):
+	return render_template('view.html')
+
+# === User login methods ===
+  
+@app.before_request
+def before_request():
+    g.user = current_user
+
+@lm.user_loader
+def load_user(id):
+    return User.query.get(int(id))
+
+@app.route('/login/', methods = ['GET', 'POST'])
+def login():
+    if g.user is not None and g.user.is_authenticated():
+        return redirect(url_for('index'))
+    form = LoginForm()
+    if form.validate_on_submit():
+        login_user(g.user)
+
+    return render_template('login.html', 
+        title = 'Sign In',
+        form = form)
+
+@app.route('/logout/')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
+
+# ====================

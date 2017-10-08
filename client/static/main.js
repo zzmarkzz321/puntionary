@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	$("#submit").click(function() {
-      var text = $("#input").val();
+      var text = $("#input").val().toLowerCase();
 	  $.ajax({
 			url: 'http://localhost:3000/punny', 
 			type : 'POST',
