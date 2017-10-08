@@ -1,8 +1,16 @@
 {
   "expoServerPort": null,
+<<<<<<< HEAD
+  "packagerPort": 19001,
+  "packagerPid": 22479,
+  "expoServerNgrokUrl": "https://hc-9ra.markizard30.mobile.exp.direct",
+  "packagerNgrokUrl": "https://packager.hc-9ra.markizard30.mobile.exp.direct",
+  "ngrokPid": 22498
+=======
   "packagerPort": null,
   "packagerPid": null,
   "expoServerNgrokUrl": null,
   "packagerNgrokUrl": null,
   "ngrokPid": null
+>>>>>>> 1e10ca1e4c0ea75c57edbf977e8cc65aa1223771
 }
