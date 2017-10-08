@@ -24,6 +24,8 @@ export default class App extends React.Component {
   render() {
     return (
         <View style={styles.container}>
+          <Text style={{textAlign:'center', fontSize:24, fontFamily: 'sans-serif-medium'}}>Puntionary</Text>
+          <View style={styles.innerContainer}>
           <Animated.View style={{transform: [{translateY: this.state.offsetY}]}}>
             <View style={styles.inputContainer}>
               <TextInput
@@ -31,6 +33,7 @@ export default class App extends React.Component {
                 placeholder="Enter a phrase or sentence"
                 returnKeyLabel={"next"}
                 onChangeText={(text) => this.setState({query:text})}
+                underlineColorAndroid="#1E8BC3"
               />
             </View>
 
@@ -39,14 +42,14 @@ export default class App extends React.Component {
                 onPress={this._handleOnPress}
                 style={styles.buttonStyle}>
                   <Text style={styles.buttonTextStyle}>
-                    Show me the magic
+                    Show me the puns
                   </Text>
               </TouchableOpacity>
             </View>
 
             <View style={styles.resultContainer}>
               <TextInput
-                style={{textAlign:'center'}}
+                style={{textAlign:'center', fontWeight:'bold'}}
                 multiline={true}
                 numberOfLines={7}
                 editable={false}
@@ -54,6 +57,7 @@ export default class App extends React.Component {
                 underlineColorAndroid="transparent"/>
             </View>
           </Animated.View>
+          </View>
         </View>
     );
   }
@@ -97,19 +101,23 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: 50,
     flex:1,
     flexDirection:'column',
-    justifyContent:'center',
     backgroundColor:'#fff',
+  },
+  innerContainer: {
+    paddingTop: 150,
+    justifyContent:'center',
   },
   inputContainer: {
     alignItems:'stretch',
   },
   buttonContainer: {
     alignItems:'center',
+    paddingBottom: 100,
   },
   resultContainer: {
-    paddingTop:100,
     alignItems:'stretch',
   },
   buttonStyle: {
