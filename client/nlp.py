@@ -36,9 +36,14 @@ def process_text(text):
         print(u'{}: {}'.format(pos_tag[token.part_of_speech.tag],
                                token.text.content))
 
+    keywords = []
     for entity in entities:
         print('=' * 20)
-        print(u'{:<16}: {}'.format('name', entity.name))
-        print(u'{:<16}: {}'.format('type', entity_type[entity.type]))
-        print(u'{:<16}: {}'.format('metadata', entity.metadata))
-        print(u'{:<16}: {}'.format('salience', entity.salience))
+        # print(u'{:<16}: {}'.format('name', entity.name))
+        # print(u'{:<16}: {}'.format('type', entity_type[entity.type]))
+        # print(u'{:<16}: {}'.format('metadata', entity.metadata))
+        # print(u'{:<16}: {}'.format('salience', entity.salience))
+        print(entity)
+        keywords.append(entity.name)
+
+    return keywords
