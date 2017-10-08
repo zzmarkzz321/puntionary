@@ -9,9 +9,9 @@ $(document).ready(function() {
 	    	key: text
 	    }),
 	     success: function(res){
-	       console.log("success!", res);
+	       console.log("success!", res['res']['response'][0]['phrase']);
 	      	
-	       $("#test").text(res);
+	       $("#test").text(res['res']['response'][0]['phrase']);
 	     }
 	      
 		})

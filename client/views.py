@@ -8,6 +8,7 @@ from flask import url_for, redirect, render_template, flash, g, session, request
 from client import client
 from nlp import process_text
 import requests
+import json
 
 @client.route('/')
 def index():
@@ -29,9 +30,10 @@ def test():
 		# Filter and query the correct puns for the respective keyword(s)
 		response = requests.get('http://localhost:5000/api/v1/puns', params=payload.data, headers = {'Access-Control-Request-Method': 'GET', 'Access-Control-Allow-Origin': 'http://localhost:3000'})
 
-		print(response.text)
+		res = json.loads(response.text)
+		print(res)
 		# return jsonify(response=response), 200
-		return jsonify({'test': 'cool!'}), 200
+		return jsonify(res=res), 200
 
 	return 'it works'
 
