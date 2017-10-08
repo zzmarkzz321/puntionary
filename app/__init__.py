@@ -20,4 +20,4 @@ app.config.from_object('app.configuration.DevelopmentConfig')
 bs = Bootstrap(app) #flask-bootstrap
 db = SQLAlchemy(app) #flask-sqlalchemy
 
-from app import controller
+from app import controllers

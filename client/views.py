@@ -28,7 +28,7 @@ def test():
 		payload = jsonify(payload=payload)
 		print(payload.data)
 		# Filter and query the correct puns for the respective keyword(s)
-		response = requests.get('http://localhost:5000/testing', params=payload.data, headers = {'Access-Control-Request-Method': 'GET', 'Access-Control-Allow-Origin': 'http://localhost:3000'})
+		response = requests.get('http://localhost:5000/api/v1/puns', params=payload.data, headers = {'Access-Control-Request-Method': 'GET', 'Access-Control-Allow-Origin': 'http://localhost:3000'})
 
 		# return jsonify(response=response), 200
 		return jsonify({'test': 'cool!'}), 200
