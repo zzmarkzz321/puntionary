@@ -24,7 +24,7 @@ export default class App extends React.Component {
   render() {
     return (
         <View style={styles.container}>
-          <Text style={{textAlign:'center', fontSize:24, fontFamily: 'sans-serif-medium'}}>Puntionary</Text>
+          <Text style={{textAlign:'center', fontSize:24, fontFamily: 'sans-serif-medium'}}>Pun-tionary</Text>
           <Text style={{textAlign:'center', fontSize:14, fontStyle:'italic', color:'#A9A9A9', fontFamily: 'sans-serif'}}>Making you cringe after every word</Text>
           <View style={styles.innerContainer}>
           <Animated.View style={{transform: [{translateY: this.state.offsetY}]}}>
